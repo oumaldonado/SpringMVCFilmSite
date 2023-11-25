@@ -29,4 +29,12 @@ public class FilmController {
 		mv.addObject("film",filmDao.findById(filmId));
 		return mv;
 	}
+	@RequestMapping (path ="findFilmsByKeyword.do", method = RequestMethod.POST, params = "keyword")
+	public ModelAndView goToFindKeyword(@RequestParam String keyword) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("WEB-INF/KeywordResult.jsp");
+		mv.addObject("films", filmDao.findFilmsByKeyword(keyword));
+		return mv;
+	}
+	
 }
