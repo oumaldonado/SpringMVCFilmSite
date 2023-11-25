@@ -12,8 +12,13 @@
 		<c:when test="${! empty films}">
 			<ul>
 				<c:forEach var="film" items="${films}">
-					<li>${film.title}</li>
-				</c:forEach>
+					<h5>${film.title}</h5>
+					<a href="findFilmById.do?filmId=${film.filmId}">About This Film</a>
+					<li>${film.description}</li>
+					<hr>
+					<br>
+					<br>
+				</c:forEach> 
 			</ul>
 		</c:when>
 		<c:otherwise>
