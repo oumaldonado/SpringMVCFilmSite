@@ -1,5 +1,6 @@
 # SpringMVCFilmSite
 #Description
+
 This is a web page that allows a user to access a fictional film database. On this website, a user can search for a movie by its film ID and/or by any keyword located either in the title or the film description. If a user chooses to search by ID, they will be prompted to enter an ID and then taken to a page where the film's information is presented. The second option allows a user to search from a selection of films that match a specific keyword. They will also be able to click on a link that shows a more in-depth look at the film. Please feel free to indulge in the wickedly named films.
 
 
