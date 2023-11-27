@@ -18,6 +18,12 @@ public class Actor {
 		this.lastName = lastName;
 
 	}
+	public Actor(int id, String firstName, String lastName) {
+		this.id=id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		
+	}
 
 	public int getId() {
 		return id;

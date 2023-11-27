@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.skilldistillery.film.entities.Actor;
 import com.skilldistillery.film.entities.Film;
 
 public class FilmDaoJdbcImpl implements FilmDAO {
@@ -36,7 +37,7 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 		try {
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PWD);
 
-			String sql = "SELECT film.*, language.name FROM film JOIN language ON film.language_id = language.id WHERE film.id = ?";
+			String sql = "SELECT film.*, language.name, category.name as category_name FROM film JOIN language ON film.language_id = language.id JOIN film_category ON film.id = film_category.film_id JOIN category ON film_category.category_id = category.id WHERE film.id = ?";
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -60,7 +61,8 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 				film.setRepCost(filmResult.getDouble("replacement_cost"));
 				film.setRating(filmResult.getString("rating"));
 				film.setFeatures(filmResult.getString("special_features"));
-
+				film.setCategory(filmResult.getString("category_name"));
+				film.setActors(findActorsByFilmId(filmId));
 			}
 
 			conn.close();
@@ -111,5 +113,34 @@ public class FilmDaoJdbcImpl implements FilmDAO {
 
 	}
 
+	@Override
+	public List<Actor> findActorsByFilmId(int filmId) {
+		List<Actor> actors = new ArrayList<>();
 
+		try {
+			Connection conn = DriverManager.getConnection(URL, USERNAME, PWD);
+			String sql = "SELECT actor.* FROM actor JOIN film_actor ON actor.id = film_actor.actor_id WHERE film_actor.film_id= ?";
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, filmId);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String firstName = rs.getString("first_name");
+				String lastName = rs.getString("last_name");
+				Actor actor = new Actor(id ,firstName, lastName);
+				actors.add(actor);
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return actors;
+
+
+}
 }

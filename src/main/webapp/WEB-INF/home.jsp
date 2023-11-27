@@ -7,7 +7,7 @@
 <title>Films</title>
 </head>
 <body>
-<h1>Welcome to My film site</h1>
+<h1>Welcome to My Film site</h1>
 
 <a href="FindFilmsByKeyword.html">Get Film By Keyword</a><br/>
 <br>

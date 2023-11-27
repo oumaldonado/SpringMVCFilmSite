@@ -13,10 +13,12 @@
       <ul>
         <li>${film.filmId}</li>
         <li>${film.title}</li>
+        <li>${film.actors}</li>
         <li>${film.language}</li>
         <li>${film.releaseYear}</li>
         <li>${film.rating}</li>
         <li>${film.description}</li>
+        <li>${film.category}</li>
       </ul>
     </c:when>
     <c:otherwise>
